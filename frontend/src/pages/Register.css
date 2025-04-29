@@ -1,0 +1,71 @@
+.register-container {
+    background: #f0fdf4;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .register-box {
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 500px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  }
+  
+  .register-box h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #2e7d32;
+  }
+  
+  .register-box label {
+    font-weight: 600;
+    margin-top: 15px;
+    display: block;
+    color: #333;
+  }
+  
+  .register-box input {
+    width: 100%;
+    padding: 12px;
+    margin-top: 6px;
+    margin-bottom: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    transition: border-color 0.2s ease;
+  }
+  
+  .register-box input:focus {
+    border-color: #2e7d32;
+    outline: none;
+  }
+  
+  .register-box button {
+    width: 100%;
+    padding: 14px;
+    margin-top: 20px;
+    background-color: #2e7d32;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+  }
+  
+  .register-box button:hover {
+    background-color: #1b5e20;
+  }
+  
+  .error {
+    color: red;
+    font-size: 13px;
+    margin-top: -8px;
+    margin-bottom: 8px;
+    display: block;
+  }
+  
