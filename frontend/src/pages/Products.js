@@ -2,18 +2,20 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { motion } from 'framer-motion';
 import './Products.css';
+import { Link } from 'react-router-dom';
 
+
+// Moved outside to fix ESLint warning
 const heroImages = [
   'https://images.unsplash.com/photo-1567306226416-28f0efdc88ce',
   'https://images.unsplash.com/photo-1600891964599-f61ba0e24092',
 ];
 
-function Products() {
+function Products({ cart, setCart }) {
   const [products, setProducts] = useState([]);
   const [search, setSearch] = useState('');
   const [error, setError] = useState('');
   const [currentImage, setCurrentImage] = useState(0);
-  const [cart, setCart] = useState([]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -40,12 +42,11 @@ function Products() {
   );
 
   const addToCart = (product) => {
-    setCart([...cart, product]);
+    setCart([...cart, product]); // ✅ This updates the global cart
   };
 
   return (
     <>
-      {/* HERO SECTION */}
       <section
         className="hero-section"
         style={{ backgroundImage: `url(${heroImages[currentImage]})` }}
@@ -57,7 +58,6 @@ function Products() {
         </div>
       </section>
 
-      {/* PRODUCTS SECTION */}
       <motion.div
         className="products-container"
         initial={{ opacity: 0 }}
@@ -110,6 +110,13 @@ function Products() {
             </motion.div>
           )}
         </div>
+
+        {/* Floating View Cart Button */}
+        {cart.length > 0 && (
+          <Link to="/cart" className="floating-cart-btn">
+            🛒 View Cart ({cart.length})
+          </Link>
+        )}
       </motion.div>
     </>
   );
