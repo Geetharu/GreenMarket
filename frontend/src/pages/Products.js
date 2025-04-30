@@ -3,16 +3,17 @@ import axios from 'axios';
 import { motion } from 'framer-motion';
 import './Products.css';
 
+const heroImages = [
+  'https://images.unsplash.com/photo-1567306226416-28f0efdc88ce',
+  'https://images.unsplash.com/photo-1600891964599-f61ba0e24092',
+];
+
 function Products() {
   const [products, setProducts] = useState([]);
   const [search, setSearch] = useState('');
   const [error, setError] = useState('');
   const [currentImage, setCurrentImage] = useState(0);
-
-  const heroImages = [
-    'https://images.unsplash.com/photo-1567306226416-28f0efdc88ce', // Fruits
-    'https://images.unsplash.com/photo-1600891964599-f61ba0e24092', // Vegetables 
-  ];
+  const [cart, setCart] = useState([]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -38,6 +39,10 @@ function Products() {
     product.description.toLowerCase().includes(search.toLowerCase())
   );
 
+  const addToCart = (product) => {
+    setCart([...cart, product]);
+  };
+
   return (
     <>
       {/* HERO SECTION */}
@@ -59,7 +64,10 @@ function Products() {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.4 }}
       >
-        <h2 id="products">Our Products</h2>
+        <div className="products-header">
+          <h2 id="products">Our Products</h2>
+          <p className="cart-count">🛒 Cart Items: {cart.length}</p>
+        </div>
 
         <input
           type="text"
@@ -86,6 +94,9 @@ function Products() {
                 <h3>{product.title}</h3>
                 <p className="price">Rs. {product.price}</p>
                 <p className="description">{product.description}</p>
+                <button className="add-to-cart-btn" onClick={() => addToCart(product)}>
+                  🛒 Add to Cart
+                </button>
               </motion.div>
             ))
           ) : (
