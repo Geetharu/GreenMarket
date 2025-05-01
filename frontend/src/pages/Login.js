@@ -2,9 +2,12 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import './Login.css';
 
 function Login() {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     email: '',
     password: ''
@@ -37,7 +40,15 @@ function Login() {
 
     try {
       const res = await axios.post('http://localhost:5000/api/users/login', formData);
-      Swal.fire('Login Successful', res.data.message, 'success');
+      Swal.fire({
+        icon: 'success',
+        title: 'Login Successful',
+        showConfirmButton: false,
+        timer: 1200
+      }).then(() => {
+        navigate('/'); // ✅ redirect to homepage after alert
+      });
+
       setFormData({ email: '', password: '' });
     } catch (err) {
       Swal.fire('Login Failed', err.response?.data?.message || 'Invalid credentials', 'error');
